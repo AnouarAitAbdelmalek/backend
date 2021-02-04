@@ -25,6 +25,9 @@ public class Creance {
 	@Column(name="ID_CREANCE")
 	Long id;
 	
+	@Column(name="CODE_CREANCE")
+	String code;
+	
 	@Column(name="NOM_CREANCE")
 	String nom;
 	
@@ -48,14 +51,23 @@ public class Creance {
 
 	
 
-	public Creance(Long id, String nom, Creancier creancier, Formulaire formulaire, List<Impaye> impayes) {
+	
+
+
+
+	public Creance(Long id, String code, String nom, Creancier creancier, Formulaire formulaire, List<Impaye> impayes) {
 		super();
 		this.id = id;
+		this.code = code;
 		this.nom = nom;
 		this.creancier = creancier;
 		this.formulaire = formulaire;
 		this.impayes = impayes;
 	}
+
+
+
+
 
 
 
@@ -81,6 +93,66 @@ public class Creance {
 
 	public void setCreancier(Creancier creancier) {
 		this.creancier = creancier;
+	}
+
+
+
+
+
+
+
+	public String getCode() {
+		return code;
+	}
+
+
+
+
+
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+
+
+
+
+
+	public Formulaire getFormulaire() {
+		return formulaire;
+	}
+
+
+
+
+
+
+
+	public void setFormulaire(Formulaire formulaire) {
+		this.formulaire = formulaire;
+	}
+
+
+
+
+
+
+
+	public List<Impaye> getImpayes() {
+		return impayes;
+	}
+
+
+
+
+
+
+
+	public void setImpayes(List<Impaye> impayes) {
+		this.impayes = impayes;
 	}
 	
 	

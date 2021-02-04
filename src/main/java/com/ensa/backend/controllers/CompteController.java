@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ensa.backend.entities.Compte;
+import com.ensa.backend.entities.Impaye;
 import com.ensa.backend.exceptions.AlreadyExistsException;
 import com.ensa.backend.exceptions.NotFoundException;
 import com.ensa.backend.services.CompteService;
@@ -42,7 +43,7 @@ public class CompteController {
 			
 			@PutMapping("/compte/{id}")
 			@ResponseStatus(HttpStatus.OK)
-			public void updateCompte(@PathVariable Long id , @RequestBody(required=false) double montant)  throws NotFoundException, AlreadyExistsException
+			public void alimenterCompte(@PathVariable Long id , @RequestBody(required=false) double montant)  throws NotFoundException, AlreadyExistsException
 			{
 				service.alimenterSolde(id, montant);
 			}
@@ -56,6 +57,13 @@ public class CompteController {
 			public void deleteCompte(@PathVariable Long id) throws NotFoundException
 			{
 				service.removeCompte(id);
+			}
+			
+			@PutMapping("/compte/{id}/payer")
+			@ResponseStatus(HttpStatus.OK)
+			public void payerImpayes(@PathVariable Long id, @RequestBody List<Impaye> impayes)
+			{
+				service.payerImpayes(id, impayes);
 			}
 			
 	

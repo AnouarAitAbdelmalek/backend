@@ -1,12 +1,16 @@
 package com.ensa.backend.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ensa.backend.entities.Compte;
+import com.ensa.backend.entities.Impaye;
 import com.ensa.backend.exceptions.AlreadyExistsException;
 import com.ensa.backend.exceptions.NotFoundException;
 import com.ensa.backend.repositories.CompteRepository;
+import com.ensa.backend.repositories.ImpayeRepository;
 
 
 
@@ -15,6 +19,9 @@ public class CompteService {
 
 	@Autowired
 	CompteRepository rep;
+	
+	@Autowired
+	ImpayeRepository impayeRepository;
 
 
 
@@ -46,6 +53,23 @@ public class CompteService {
 		rep.delete(compte);
 
 	}
-
+	
+	public void payerImpayes(Long id, List<Impaye> impayes)
+	{
+		double somme = 0;
+		for (Impaye impaye : impayes) {
+			somme+= impaye.getMontant();
+		}
+		
+		Compte compte = rep.findById(id).orElseThrow(() -> new NotFoundException("Aucun compte avec l'id "+id+" n'est trouvé"));
+		if(compte.getSolde()>= somme)
+		{
+			compte.setSolde(compte.getSolde()-somme);
+			rep.save(compte);
+			for (Impaye impaye : impayes) {
+				impayeRepository.delete(impaye);
+			}
+		}
+	}
 
 }

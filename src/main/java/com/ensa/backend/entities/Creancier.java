@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,6 +22,9 @@ public class Creancier {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_CREANCIER")
 	Long id;
+	
+	@Column(name="CODE_CREANCIER")
+	String code;
 	
 	
 	@Column(name="CATEGORIE_CREANCIER")
@@ -44,13 +46,22 @@ public class Creancier {
 	}
 
 
-	public Creancier(Long id, String categorie, String nom, List<Creance> creances) {
+	
+
+
+
+	public Creancier(Long id, String code, String categorie, String nom, List<Creance> creances) {
 		super();
 		this.id = id;
+		this.code = code;
 		this.categorie = categorie;
 		this.nom = nom;
 		this.creances = creances;
 	}
+
+
+
+
 
 
 	public Long getId() {
@@ -90,6 +101,22 @@ public class Creancier {
 
 	public void setCreances(List<Creance> creances) {
 		this.creances = creances;
+	}
+
+
+
+
+
+	public String getCode() {
+		return code;
+	}
+
+
+
+
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

@@ -24,8 +24,11 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.ensa.backend.entities.Admin;
+import com.ensa.backend.entities.Creancier;
 import com.ensa.backend.exceptions.NotFoundException;
 import com.ensa.backend.services.AdminService;
+import com.ensa.backend.services.CreancierService;
+import com.ensa.backend.services.StaticCreanciers;
 
 
 @Configuration
@@ -34,6 +37,12 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	CreancierService creancierService;
+	
+	@Autowired
+	StaticCreanciers staticCreanciers;
 	
 	UserPrincipalDetailsService service;
 	
@@ -57,8 +66,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	        adminService.addAdmin(admin);
 			
 		}
-
-	    
+		
+		List<Creancier> creanciers = creancierService.getAll();
+		if(creanciers.isEmpty()) {
+			staticCreanciers.addCreanciers();
+		}
 	}
 
 	@Bean
