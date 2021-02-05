@@ -14,7 +14,7 @@ import com.ensa.backend.services.ClientService;
 
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 public class ClientController {
 	
@@ -30,7 +30,7 @@ public class ClientController {
 	//GET
 			@GetMapping("/clients")
 			@ResponseStatus(HttpStatus.OK)
-			public List<Client> getClients(@RequestParam(name="id", required=false) Long id) throws NotFoundException
+			public List<Client> getClients() throws NotFoundException
 			{
 				return service.getClients();
 			}

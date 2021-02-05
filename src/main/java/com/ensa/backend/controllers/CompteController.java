@@ -16,7 +16,7 @@ import com.ensa.backend.exceptions.NotFoundException;
 import com.ensa.backend.services.CompteService;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 public class CompteController {
 	

@@ -21,7 +21,7 @@ import com.ensa.backend.services.CreancierService;
 
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 public class CreancierController {
 	

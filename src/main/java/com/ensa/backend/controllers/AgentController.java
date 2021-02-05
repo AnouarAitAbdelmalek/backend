@@ -10,9 +10,11 @@ import com.ensa.backend.entities.Agent;
 import com.ensa.backend.exceptions.AlreadyExistsException;
 import com.ensa.backend.exceptions.NotFoundException;
 import com.ensa.backend.services.AgentService;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 public class AgentController {
 	
@@ -80,7 +82,11 @@ public class AgentController {
 			@ResponseStatus(HttpStatus.OK)
 			public void newPassword(@PathVariable(name="id") Long id, @RequestBody String password) throws NotFoundException
 			{
-				service.newPassword(id, password);
+				@SuppressWarnings("deprecation")
+				JsonObject jsonObject = new JsonParser().parse(password).getAsJsonObject();
+
+				
+				service.newPassword(id, jsonObject.get("password").getAsString());
 				
 			}
 	

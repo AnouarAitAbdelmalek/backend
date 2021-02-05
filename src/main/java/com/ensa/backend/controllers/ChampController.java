@@ -21,7 +21,7 @@ import com.ensa.backend.services.ChampService;
 
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 public class ChampController {
 	

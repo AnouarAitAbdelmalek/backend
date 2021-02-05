@@ -126,6 +126,7 @@ public class AgentService {
 		//vérifier l'existence du client
 		Agent agent=rep.findById(id).orElseThrow(() -> new NotFoundException("Aucun client avec l'id "+id+" n'est trouvé"));
 		agent.setPassword(new BCryptPasswordEncoder().encode(password));
+		System.out.println(password);
 		agent.setProvisoire(false);
 		rep.save(agent);
 		
